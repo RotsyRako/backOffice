@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Ench&egrave;res par mois</title>
+        <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
+    </head>
+    <body id="page-top">
+        <div id="wrapper">
+            <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #A3B4A2;">
+                <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-handshake"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>Enchères</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item"><a class="nav-link active" th:href="@{../BackOffice/LoadStatistiques}"><i class="fas fa-tachometer-alt"></i><span>Statistiques</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{../BackOffice/Categorie}"><i class="fa fa-th-list"></i>Gestion de catégories</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{../BackOffice/Commission}"><i class="fa fa-th-list"></i>Gestion de commissions</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{../BackOffice/LoadAllSoldes}"><i class="fa fa-credit-card"></i><span>Rechargement de compte</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{../BackOffice/updateDefaultValue}"><i class="fa fa-credit-card"></i><span>Mettre &agrave; jour la dur&eacute;e par d&eacute;faut</span></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{../BackOffice}"><i class="fa fa-sign-out"></i><span>Déconnexion</span></a></li>
+                    </ul>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                </div>
+            </nav>
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <div class="container-fluid">
+                        <!--<div class="d-sm-flex justify-content-between align-items-center mb-4">
+                            <h3 class="text-dark mb-0" style="color: #38686A;"><strong>Statistiques</strong></h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" style="background: #38686A;border-style: none;"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+                        </div>-->
+
+                        <!--REVENUS MENSUELS ET ANNUELS-->
+
+                        <div class="row" style="margin-top: 40px;">
+                            <div class="col-md-6 col-xl-3 mb-4">
+                                <div class="card shadow border-start-primary py-2">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-dark fw-bold h5 mb-0"><span>REVENU MENSUEL</span></div>
+                                                <tr th:each="tlm : ${tousLesMR}">
+                                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span th:text="*{tlm.getMois()}"></span></div>
+                                                    <div class="text-uppercase fw-bold text-xs mb-1" style="color: dimgray;" ><span th:text="*{tlm.revenu} + ' AR'"></span></div>
+                                                </tr>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3 mb-4">
+                                <div class="card shadow border-start-success py-2">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-dark fw-bold h5 mb-0"><span>REVENU ANNUEL</span></div>
+                                                <tr th:each="tly : ${tousLesYR}">
+                                                <div class="text-uppercase text-success fw-bold text-xs mb-1"><span th:text="*{tly.year}"></span></div>
+                                                <div class="text-uppercase fw-bold text-xs mb-1" style="color: dimgray;" ><span th:text="*{tly.revenu} + ' AR'"></span></div>
+                                                </tr>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3 mb-4">
+                                <div class="card shadow border-start-success py-2">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-dark fw-bold h5 mb-0"><span>NOMBRE D'ENCHERES PAR MOIS</span></div>
+                                                <tr th:each="epm : ${tousLesEPM}">
+                                                <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span th:text="*{epm.getMonth()}"></span></div>
+                                                <div class="text-uppercase fw-bold text-xs mb-1" style="color: dimgray;" ><span th:text="*{epm.nbrencheres} + ' ench&egrave;res'"></span></div>
+                                                </tr>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3 mb-4">
+                                <div class="card shadow border-start-success py-2">
+                                    <div class="card-body">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col me-2">
+                                                <div class="text-dark fw-bold h5 mb-0"><span>APPORTS PAR CATEGORIE</span></div>
+                                                <tr th:each="cc : ${tousLesCC}">
+                                                <div class="text-uppercase text-success fw-bold text-xs mb-1"><span th:text="*{cc.nomproduit}"></span></div>
+                                                <div class="text-uppercase fw-bold text-xs mb-1" style="color: dimgray;" ><span th:text="*{cc.valeurCommission}+' AR '"></span></div>
+                                                </tr>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                        <!--TABLEAU STATISTIQUE-->
+                        
+        <!--<table>
+        <tr>
+            <th>Mois</th>
+            <th>Nombre d'ench&egrave;res</th>
+        </tr>
+        <tr th:each="epm : ${tousLesEPM}">
+            <td th:text="*{epm.getMonth()}"></td>
+            <td th:text="*{epm.nbrencheres}"></td>
+        </tr>
+    </table>-->
+    <!--<table>
+        <tr>
+            <th>Cat&eacute;gorie</th>
+            <th>Apports</th>
+        </tr>
+        <tr th:each="cc : ${tousLesCC}">
+            <td th:text="*{cc.nomproduit}"></td>
+            <td th:text="*{cc.valeurCommission}"></td>
+        </tr>
+    </table>-->
+    <!--<table>
+        <tr>
+            <th>Mois</th>
+            <th>Total des revenus</th>
+        </tr>
+        <tr th:each="tlm : ${tousLesMR}">
+            <td th:text="*{tlm.getMois()}"></td>
+            <td th:text="*{tlm.revenu}"></td>
+        </tr>
+    </table>-->
+    <!--<table>
+        <tr>
+            <th>Ann&eacute;e</th>
+            <th>Total des revenus</th>
+        </tr>
+        <tr th:each="tly : ${tousLesYR}">
+            <td th:text="*{tly.year}"></td>
+            <td th:text="*{tly.revenu}"></td>
+        </tr>
+    </table>-->
+    <script th:href="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:href="@{/assets/js/chart.min.js}"></script>
+    <script th:href="@{/assets/js/bs-init.js}"></script>
+    <script th:href="@{/assets/js/theme.js}"></script>
+
+</body>
+
+</html>

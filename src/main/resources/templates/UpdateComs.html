@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<title>Commissions</title>
+		<link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+		<link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
+		<link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
+		<link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
+	</head>
+	<body id="page-top">
+		<div id="wrapper">
+		<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #A3B4A2;">
+		  <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+				  <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-handshake"></i></div>
+				  <div class="sidebar-brand-text mx-3"><span>Enchères</span></div>
+			  </a>
+			  <hr class="sidebar-divider my-0">
+			  <ul class="navbar-nav text-light" id="accordionSidebar">
+				  <li class="nav-item"><a class="nav-link" th:href="@{../LoadStatistiques}"><i class="fas fa-tachometer-alt"></i>Statistiques</a></li>
+				  <li class="nav-item"><a class="nav-link" th:href="@{../Categorie}"><i class="fa fa-th-list"></i><span>Gestion de catégories</span></a></li>
+				  <li class="nav-item"><a class="nav-link active" th:href="@{../Commission}"><i class="fa fa-th-list"></i>Gestion de commissions</a></li>
+				  <li class="nav-item"><a class="nav-link" th:href="@{../LoadAllSoldes}"><i class="fa fa-credit-card"></i><span>Rechargement de compte</span></a></li>
+				  <li class="nav-item"><a class="nav-link" th:href="@{../updateDefaultValue}"><i class="fa fa-credit-card"></i><span>Mettre &agrave; jour la dur&eacute;e par d&eacute;faut</span></a></li>
+				  <li class="nav-item"><a class="nav-link" th:href="@{../}"><i class="fa fa-sign-out"></i><span>D&eacute;connexion</span></a></li>
+			  </ul>
+			  <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+		  </div>
+	  </nav>
+	  <div class="d-flex flex-column" id="content-wrapper">
+		<div id="content">
+		  <div class="col-lg-10" style="width: 1500px;">
+			<div class="row">
+			<div class="col">
+				<div class="card shadow">
+					<div class="card-header py-3">
+						<p class="text-primary m-0 fw-bold">Mettre la commission &agrave; jour</p>
+					</div>
+	
+		<form action="#"  th:action="@{../saveComs}" th:object="${com}"
+          method="POST">
+			    <input type="hidden" field="*{idenchere}" name="idenchere" th:value="${com.idenchere}"/>
+			    <input type="hidden" field="*{dateEnchere}" name="dateEnchere" th:value="${com.dateEnchere}"/>
+			    <input type="hidden" field="*{gagnant}" name="gagnant" th:value="${com.gagnant}"/>
+			    <input type="hidden" field="*{idenchereur}" name="idenchereur" th:value="${com.idenchereur}"/>
+			    <input type="hidden" field="*{sommeDepart}" name="sommeDepart" th:value="${com.sommeDepart}"/>
+			    <input type="hidden" field="*{dateFin}" name="dateFin" th:value="${com.dateFin}"/>
+                <input style="border-color: gray;border-style: solid;border-width: 0.5px; border-radius: 20px;" type="text" field="*{commission}" name="commission" th:value="${com.commission}"/>
+			    <input type="hidden" field="*{prixMinimumDeVente}" name="prixMinimumDeVente" th:value="${com.prixMinimumDeVente}"/>
+			    <input type="hidden" field="*{designationproduit}" name="designationProduit" th:value="${com.designationProduit}"/>
+                <input type="hidden" field="*{categorie}" name="categorie" th:value="${com.categorie}"/>
+                <input type="hidden" field="*{statut}" name="statut" th:value="${com.statut}"/>
+                <button type="submit" style="border-style: none;font-size: smaller; border-radius: 10px; color: white;background-color: #35605A; padding-left: -10px;">Valider</button>
+          </form>
+		<hr>
+	</div>
+</body>
+</html>

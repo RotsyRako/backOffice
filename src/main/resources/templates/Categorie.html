@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cat&eacute;gorie</title>
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
+</head>
+<body id="page-top">
+  <div id="wrapper">
+  <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #A3B4A2;">
+    <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-handshake"></i></div>
+            <div class="sidebar-brand-text mx-3"><span>Enchères</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><a class="nav-link" th:href="@{~/BackOffice/LoadStatistiques}"><i class="fas fa-tachometer-alt"></i>Statistiques</a></li>
+            <li class="nav-item"><a class="nav-link active" th:href="@{~/BackOffice/Categorie}"><i class="fa fa-th-list"></i><span>Gestion de catégories</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{~/BackOffice/Commission}"><i class="fa fa-th-list"></i>Gestion de commissions</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{~/BackOffice/LoadAllSoldes}"><i class="fa fa-credit-card"></i><span>Rechargement de compte</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{~/BackOffice/updateDefaultValue}"><i class="fa fa-credit-card"></i><span>Mettre &agrave; jour la dur&eacute;e par d&eacute;faut</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{~/BackOffice}"><i class="fa fa-sign-out"></i><span>D&eacute;connexion</span></a></li>
+        </ul>
+        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+    </div>
+</nav>
+<div class="d-flex flex-column" id="content-wrapper">
+  <div id="content">
+    <div class="col-lg-10" style="width: 1500px;">
+      <div class="row">
+      <div class="col">
+          <div class="card shadow">
+              <div class="card-header py-3">
+                  <p class="text-primary m-0 fw-bold">Cat&eacute;gories</p>
+              </div>
+              <div class="card-body">
+                  <form action="#"  th:action="@{../BackOffice/saveCategorie}" th:object="${categorie}" method="POST">
+                      <div class="mb-3"><label class="form-label" for="address"><strong>Ajouter une catégorie</strong></label>
+                        <input style="border-color: gray;border-style: solid;border-width: 0.5px; border-radius: 20px;" type="text" field="*{intitulecategorieproduit}" name="intitulecategorieproduit"/>
+                        <button type="submit" style="border-style: none; background-color: white; padding-left: -10px;"><i class="fa fa-plus-square" style="margin-left: 10px;color: #187795;"></i></button></div>
+                  </form>
+                  <tr th:each="current:${categories}">
+                      <div class="mb-3">
+                        <label class="form-label" for="address">
+                          <strong>
+                            <p th:text="${current.intitulecategorieproduit }"></p>
+                          </strong>
+                        </label>
+                        <a th:href="@{../BackOffice/updateCategorie/{id}(id=${current.idcategorieproduit})}"><i class="fa fa-edit" style="margin-left: 10px;color: #187795;"></i></a>
+                        <!--<a th:href="@{../BackOffice/deleteCategorie/{id}(id=${current.idcategorieproduit})}"><i class="fa fa-trash" style="margin-left: 10px;color: #187795;"></i></a>-->
+                      </div>
+                    </tr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<script th:href="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:href="@{/assets/js/bs-init.js}"></script>
+    <script th:href="@{/assets/js/theme.js}"></script>
+  </div>
+</body>
+
+</html>
